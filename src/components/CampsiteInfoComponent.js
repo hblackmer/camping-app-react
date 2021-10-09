@@ -25,10 +25,9 @@ class CampsiteInfo extends React.Component {
                         return (
                             <div key={comments.id}>
                                <div>{comments.text}</div>
-                               <div>
-                                   <span>-- {comments.author},</span>
-                                   <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}</span>
-                                </div>
+                               <p>
+                                   -- {comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}
+                                </p>
                             </div>
                         )
                     })}
