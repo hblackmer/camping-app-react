@@ -14,9 +14,9 @@ function RenderPartner({partner}) {
                     <Media>{partner.description}</Media>
                 </Media>
             </React.Fragment>
-        )
+        );
     }
-    return <div />
+    return <div />;
 }
 
 
