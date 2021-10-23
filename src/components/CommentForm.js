@@ -22,10 +22,12 @@ class CommentForm extends Component {
         this.setState({ 
             isModalOpen: !this.state.isModalOpen
         });
-      }
-    
+    }
+
     handleSubmit(values) {
         this.toggleModal();
+        console.log("Current state is: " + JSON.stringify(values));
+        alert("Current state is: " + JSON.stringify(values));
     }
 
     render() { 
