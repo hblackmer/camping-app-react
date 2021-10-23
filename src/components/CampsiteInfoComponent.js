@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 function RenderCampsite({campsite}) {
     return (
@@ -30,6 +31,7 @@ function RenderComments({comments}) {
                         </div>
                     )
                 })}
+                <CommentForm />
             </div>
         );
     }
