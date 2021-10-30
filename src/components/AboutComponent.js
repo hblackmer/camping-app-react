@@ -1,42 +1,43 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Fade, Stagger } from 'react-animation-components';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 
 function PartnerList(props) {
-    const partners = props.partners.map(partner => {
+    const partners = props.partners.partners.map(partner => {
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
+            <Fade in key={partner.id}>
+                <Media tag="li" key={partner.id}>
+                    <RenderPartner partner={partner} />
+                </Media>
+            </Fade>
         );
     });
 
-    if (props.isLoading) {
+    if (props.partners.isLoading) {
+        return <Loading />;
+    }
+    if (props.partners.errMess) {
         return (
-            <div className="container">
-                <div className="row">
-                    <Loading />
-                </div>
+            <div className="col">
+                <h4>{props.partners.errMess}</h4>
             </div>
         );
     }
-    if (props.errMess) {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h4>{props.errMess}</h4>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    <Media list={partners}></Media>
+    return (
+        <div className="col mt-4">
+            <Media list>
+                <Stagger in>
+                    {partners}
+                </Stagger>
+            </Media>
+        </div>
+    );
 }
 
-export function RenderPartner({partner}) {
+export function RenderPartner({ partner }) {
     if (partner) {
         return (
             <React.Fragment>
@@ -54,14 +55,6 @@ export function RenderPartner({partner}) {
 }
 
 function About(props) {
-    const partners = props.partners.map(partner => {
-        return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
-        );
-    });
-
     return (
         <div className="container">
             <div className="row">
@@ -103,7 +96,7 @@ function About(props) {
                                 <p className="mb-0">I will not follow where the path may lead, but I will go where there is no path, and I will leave a trail.</p>
                                 <footer className="blockquote-footer">Muriel Strode,{' '}
                                     <cite title="Source Title">"Wind-Wafted Wild Flowers" -
-                                    The Open Court, 1903</cite>
+                                        The Open Court, 1903</cite>
                                 </footer>
                             </blockquote>
                         </CardBody>
@@ -115,7 +108,7 @@ function About(props) {
                     <h3>Community Partners</h3>
                 </div>
                 <div className="col mt-4">
-                    <PartnerList partners={props.partners}/>
+                    <PartnerList partners={props.partners} />
                 </div>
             </div>
         </div>
